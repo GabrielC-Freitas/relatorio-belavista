@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Atualização da Base de Dados - SCOD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        html {
+            scroll-behavior: smooth; /* Para rolagem suave nos links internos */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            /* SCOD Colors */
+            --scod-pink: #E91E63;
+            --scod-dark-gray: #212529;
+            --scod-light-gray: #f8f9fa;
+            --scod-text-gray: #495057;
+            --scod-green-light-text: #28a745; /* Verde claro para texto de status corrigido */
+        }
+        .bg-scod-dark { background-color: var(--scod-dark-gray); }
+        .text-scod-pink { color: var(--scod-pink); }
+        .border-scod-pink { border-color: var(--scod-pink); }
+        .bg-scod-light { background-color: var(--scod-light-gray); }
+        .text-scod-gray { color: var(--scod-text-gray); }
+        .text-scod-green-light { color: var(--scod-green-light-text); }
+
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        .status-resolved { background-color: var(--scod-green-light-text); } /* Verde para resolvido/implementado/corrigido */
+        .status-acknowledged { background-color: #ffc107; } /* Amarelo para ciência/ainda pendente de alguma forma */
+        .status-info { background-color: #17a2b8; } /* Azul para informação/comportamento padrão */
+
+
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .print-logo {
+            display: none;
+        }
+        .nav-button {
+            background-color: var(--scod-pink);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem; /* rounded-md */
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-weight: 500; /* medium */
+        }
+        .nav-button:hover {
+            background-color: #c2185b; /* Um tom mais escuro de rosa para hover */
+        }
+
+        @media print {
+            html { scroll-behavior: auto; } /* Desativa rolagem suave para impressão */
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-logo {
+                display: block;
+                max-width: 150px;
+                margin-bottom: 20px;
+            }
+            .bg-scod-dark {
+                background-color: var(--scod-dark-gray) !important;
+                color: white !important;
+            }
+            .text-scod-pink {
+                color: var(--scod-pink) !important;
+            }
+             .card {
+                border: 1px solid #dee2e6 !important;
+                box-shadow: none !important;
+            }
+            .bg-scod-light {
+                background-color: #ffffff !important;
+            }
+            .status-dot {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .text-scod-green-light {
+                color: var(--scod-green-light-text) !important;
+            }
+            .nav-button {
+                display: none; /* Oculta botões de navegação na impressão */
+            }
+        }
+    </style>
+</head>
+<body class="bg-scod-light text-scod-gray antialiased">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- Cabeçalho -->
+        <header class="mb-8 text-center">
+            <img src="https://raw.githubusercontent.com/SCODINOVACAO/scod/main/SCOD%20-%20LOGO%20HORIZONTAL%20BRANCO%20%5BEDITAVEL%5D.png" alt="[Logo da SCOD]" class="mx-auto mb-4 h-16 sm:h-20 print-logo">
+             <div class="bg-scod-dark text-white p-6 rounded-lg shadow-lg">
+                <div class="flex flex-col sm:flex-row justify-between items-center">
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-bold text-scod-pink">Relatório de Atualização da Base de Dados</h1>
+                        <p class="text-sm sm:text-md">Data da Análise: 05 de Junho de 2025</p>
+                    </div>
+                    <img src="https://raw.githubusercontent.com/SCODINOVACAO/scod/main/SCOD%20-%20LOGO%20HORIZONTAL%20BRANCO%20%5BEDITAVEL%5D.png" alt="[Logo da SCOD]" class="h-12 sm:h-16 mt-4 sm:mt-0 no-print">
+                </div>
+            </div>
+        </header>
+
+        <!-- Introdução Ajustada -->
+        <section class="mb-6 p-6 bg-white rounded-lg shadow-md card">
+            <!-- Removida a saudação "Prezado Guilherme," -->
+            <p class="mb-2 text-lg">Informamos o recebimento do feedback e da planilha de imóveis atualizada para <strong>Junho de 2025 (contendo 444 lotes)</strong>. Confirmamos que seguiremos com a substituição da base de dados corrente pela nova versão encaminhada.</p>
+            <p class="text-lg">Preparamos um resumo detalhado dos pontos levantados e o status atual de cada um deles em nosso sistema. Você pode navegar diretamente para as seções de interesse utilizando os botões abaixo:</p>
+        </section>
+
+        <!-- Navegação Interna -->
+        <nav class="my-6 p-4 bg-white rounded-lg shadow-md card flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 no-print">
+            <a href="#devolutivas" class="nav-button text-center">Ver Devolutivas dos Pontos</a>
+            <a href="#proximos-passos" class="nav-button text-center">Ver Próximos Passos</a>
+        </nav>
+
+        <!-- Detalhes dos Pontos (Devolutivas) -->
+        <section id="devolutivas" class="space-y-6 mb-8">
+            <h2 class="text-2xl font-semibold text-scod-dark mb-4 pt-4">Devolutivas dos Pontos Levantados</h2>
+            <!-- Quantidade de Imóveis -->
+            <div class="p-6 bg-white rounded-lg shadow-md card">
+                <h3 class="text-lg sm:text-xl font-semibold text-scod-dark mb-3 flex items-center">
+                    <span class="status-dot status-acknowledged"></span>Quantidade de Imóveis (Ref. Planilhas 05/2025 e 06/2025)
+                </h3>
+                <p><strong>Feedback Guilherme (sobre 05/2025):</strong> <em>"constam 446 imóveis, mas na planilha de 05/2025 foram enviados 447"</em></p>
+                <p class="mt-1"><strong>Esclarecimento SCOD:</strong> Conforme informado anteriormente, a planilha de Maio/2025 (05/2025) continha 447 linhas, sendo uma delas uma duplicidade, resultando em 446 imóveis únicos para aquele período. Estamos cientes desta observação.</p>
+                <p class="mt-2"><strong>Nova Planilha (06/2025):</strong> Recebemos a nova planilha com <strong>444 lotes</strong>, que será a base para os próximos processamentos.</p>
+            </div>
+
+            <!-- Campos "Quadra / Lote" e "CEP" -->
+            <div class="p-6 bg-white rounded-lg shadow-md card">
+                <h3 class="text-lg sm:text-xl font-semibold text-scod-dark mb-3 flex items-center">
+                    <span class="status-dot status-resolved"></span>Campos "Quadra / Lote" e "CEP" em Branco na Consulta
+                </h3>
+                <p><strong>Feedback Guilherme:</strong> Informações de "Quadra / Lote" e "CEP" ainda estão em branco ao consultar um imóvel.</p>
+                <p class="mt-2 text-sm text-scod-green-light font-medium"><strong>Status:</strong> CORRIGIDO - PENDENTE DE NOVA ATUALIZAÇÃO/CAPTURA. A correção foi implementada em nossa tecnologia. Os dados corretos serão exibidos após o processamento da nova base de imóveis.</p>
+            </div>
+
+            <!-- Campo "Compromissário" / "Grupo/Subgrupo" -->
+            <div class="p-6 bg-white rounded-lg shadow-md card">
+                <h3 class="text-lg sm:text-xl font-semibold text-scod-dark mb-3 flex items-center">
+                    <span class="status-dot status-info"></span>Campo "Compromissário" vs. "Grupo/Subgrupo" na Consulta
+                </h3>
+                <p><strong>Feedback Guilherme:</strong> <em>"o nome do cliente aparece em "Grupo/Subgrupo"; não deveria aparecer em "Compromissário"?"</em></p>
+                <p class="mt-1"><strong>Esclarecimento SCOD:</strong> O campo "Compromissário" é preenchido automaticamente pela nossa tecnologia apenas quando esta informação está explicitamente disponível e designada como tal na fonte original dos dados (boletos ou CNDs). Para a cidade em questão, essa designação específica não está presente.</p>
+                <p class="mt-1">A exibição do nome do cliente no campo "Grupo/Subgrupo" ocorre porque essa é a forma como a informação é capturada e categorizada a partir da origem dos dados. Este é o comportamento padrão do sistema para as fontes de dados disponíveis para este município.</p>
+            </div>
+
+            <!-- Campos em Branco no Relatório Excel -->
+            <div class="p-6 bg-white rounded-lg shadow-md card">
+                <h3 class="text-lg sm:text-xl font-semibold text-scod-dark mb-3 flex items-center">
+                    <span class="status-dot status-resolved"></span>Campos em Branco no Relatório Excel ("valor venal", "quadra", "lote")
+                </h3>
+                <p><strong>Feedback Guilherme:</strong> Campos "valor venal", "quadra" e "lote" ainda aparecem em branco no relatório Excel.</p>
+                <p class="mt-2 text-sm text-scod-green-light font-medium"><strong>Status:</strong> CORRIGIDO - PENDENTE DE NOVA ATUALIZAÇÃO/CAPTURA. A tecnologia foi ajustada para o correto preenchimento destes campos. A atualização será visível nos relatórios gerados após a nova carga de dados.</p>
+            </div>
+
+            <!-- Metragem (Área) dos Lotes e Separador Decimal no Excel -->
+            <div class="p-6 bg-white rounded-lg shadow-md card">
+                <h3 class="text-lg sm:text-xl font-semibold text-scod-dark mb-3 flex items-center">
+                    <span class="status-dot status-resolved"></span>Metragem (Área) dos Lotes e Separador Decimal (Relatório Excel)
+                </h3>
+                <p><strong>Feedback Guilherme:</strong> Erro de multiplicação por 10 na metragem (área) e uso de ponto em vez de vírgula como separador decimal persistem no relatório Excel.</p>
+                <p class="mt-2 text-sm text-scod-green-light font-medium"><strong>Status:</strong> CORRIGIDO - PENDENTE DE NOVA ATUALIZAÇÃO/CAPTURA. As correções necessárias na lógica de cálculo da área e na formatação do separador decimal foram implementadas. Os relatórios gerados com a nova base de dados refletirão estas correções.</p>
+            </div>
+        </section>
+
+        <!-- Conclusão (Próximos Passos) -->
+        <section id="proximos-passos" class="mt-8 p-6 bg-white rounded-lg shadow-md card">
+            <h2 class="text-xl sm:text-2xl font-semibold text-scod-dark mb-3 pt-4">Próximos Passos</h2>
+            <p>Confirmamos que procederemos com a substituição da base de dados atual pela nova planilha de Junho/2025 (444 lotes).</p>
+            <p class="mt-2">Os pontos que você reportou anteriormente (Campos "Quadra/Lote e CEP" na consulta, Campos em branco no Excel, e Metragem/separador decimal no Excel) <strong>foram corrigidos em nossa tecnologia</strong>. As informações corretas e completas estarão disponíveis no sistema e nos relatórios assim que a nova base de dados for processada e atualizada.</p>
+            <p class="mt-2">Quanto à exibição da informação do cliente no campo "Grupo/Subgrupo" em vez de "Compromissário", reiteramos que este é o comportamento esperado do sistema devido à forma como os dados são disponibilizados na origem para este município.</p>
+            <p class="mt-4">Agradecemos a colaboração e permanecemos à disposição para quaisquer dúvidas ou necessidades adicionais!</p>
+            <p class="mt-2 font-medium">Atenciosamente,</p>
+            <p class="text-scod-pink font-semibold">Equipe SCOD</p>
+        </section>
+
+        <!-- Rodapé -->
+        <footer class="mt-12 text-center text-sm text-scod-gray no-print">
+            <p>&copy; <span id="currentYear"></span> SCOD - Inovação e Gestão. Todos os direitos reservados.</p>
+            <p class="text-xs">Este é um relatório gerado automaticamente.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
